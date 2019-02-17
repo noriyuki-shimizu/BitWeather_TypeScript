@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2018",
+    "charset": "utf8",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "sourceMap": true,
+    "types" : ["node"]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*"
+  ]
+}
+

@@ -1,0 +1,13 @@
+"use strict";
+exports.__esModule = true;
+var ipinfoEnv_1 = require("./src/systemEnv/ipinfoEnv");
+var tokoroEnv_1 = require("./src/systemEnv/tokoroEnv");
+var openWeatherMapEnv_1 = require("./src/systemEnv/openWeatherMapEnv");
+var hoge = new ipinfoEnv_1.IpinfoEnv();
+hoge.toString();
+console.log();
+var tokoro = new tokoroEnv_1.TokoroEnv();
+tokoro.toString();
+console.log();
+var openWeatherMap = new openWeatherMapEnv_1.OpenWeatherMapEnv();
+openWeatherMap.toString();
