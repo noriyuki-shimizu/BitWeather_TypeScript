@@ -21,7 +21,7 @@ export class Env {
 
         return this.yamlPropertys[key];
 	}
-	protected scan(yamlProperty: any, keyIterator: any): any {
+	private scan(yamlProperty: any, keyIterator: any): any {
 		var next: {value: number; done: boolean} = keyIterator.next();
 
 		if(next.done) {
