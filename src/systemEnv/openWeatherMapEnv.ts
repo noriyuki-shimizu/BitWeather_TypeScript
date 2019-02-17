@@ -1,8 +1,8 @@
 import { Env } from "./env";
 
 export class OpenWeatherMapEnv extends Env {
-	private url:string;
-	private param:{
+	public readonly url:string;
+	public readonly param:{
 		cnt:number;
                 units:string;
                 mode:string;

@@ -1,7 +1,7 @@
 import { Env } from "./env";
   
 export class TokoroEnv extends Env {
-        private address: any;
+        public readonly address: any;
 
         constructor() {
                 super();

@@ -1,8 +1,8 @@
 import { Env } from "./env";
 
 export class IpinfoEnv extends Env {
-	private requestUrl: string;
-	private requestGetToken: string;
+	public readonly requestUrl: string;
+	public readonly requestGetToken: string;
 
 	constructor() {
 		super();
