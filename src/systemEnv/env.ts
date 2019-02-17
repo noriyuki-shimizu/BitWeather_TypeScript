@@ -6,28 +6,28 @@ export class Env {
 	private yamlPropertys: {ipinfo: any; tokoro: any; openweathermap: any;};
 
 	constructor() {
-		const appYml = fs.readFileSync(__dirname + '/../../config/app.yaml', 'utf8');
+		const appYml: string = fs.readFileSync(__dirname + '/../../config/app.yaml', 'utf8');
 
-        	this.yamlPropertys = yaml.parse(appYml);	
+        this.yamlPropertys = yaml.parse(appYml);	
 	}
-	protected load(key: string):any {
+	protected load(key: string): any {
 		const filler:string = '.';
 		
 		if(key.indexOf(filler) >= 0) {
-                    var keyList:string[]  = key.split(filler);
+            var keyList:string[]  = key.split(filler);
 
-                    return this.scan(keyList);
-                }
+            return this.scan(this.yamlPropertys, keyList.values());
+        }
 
-                return this.yamlPropertys[key];
+        return this.yamlPropertys[key];
 	}
-	protected scan(keyList: string[]): any {
-		var ymlProperty:any = Object.assign({}, this.yamlPropertys);
+	protected scan(yamlProperty: any, keyIterator: any): any {
+		var next: {value: number; done: boolean} = keyIterator.next();
 
-                keyList.forEach((key, index) => {
-                    ymlProperty = ymlProperty[key];
-                });
+		if(next.done) {
+			return yamlProperty;
+		}
 
-                return ymlProperty;		
+		return this.scan(yamlProperty[next.value], keyIterator);	
 	}
 }

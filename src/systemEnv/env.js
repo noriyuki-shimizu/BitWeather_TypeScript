@@ -11,16 +11,16 @@ var Env = /** @class */ (function () {
         var filler = '.';
         if (key.indexOf(filler) >= 0) {
             var keyList = key.split(filler);
-            return this.scan(keyList);
+            return this.scan(this.yamlPropertys, keyList.values());
         }
         return this.yamlPropertys[key];
     };
-    Env.prototype.scan = function (keyList) {
-        var ymlProperty = Object.assign({}, this.yamlPropertys);
-        keyList.forEach(function (key, index) {
-            ymlProperty = ymlProperty[key];
-        });
-        return ymlProperty;
+    Env.prototype.scan = function (yamlProperty, keyIterator) {
+        var next = keyIterator.next();
+        if (next.done) {
+            return yamlProperty;
+        }
+        return this.scan(yamlProperty[next.value], keyIterator);
     };
     return Env;
 }());
