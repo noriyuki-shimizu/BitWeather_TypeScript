@@ -1,13 +1,17 @@
+#!/usr/local/bin/node
 "use strict";
 exports.__esModule = true;
-var ipinfoEnv_1 = require("./src/systemEnv/ipinfoEnv");
-var tokoroEnv_1 = require("./src/systemEnv/tokoroEnv");
-var openWeatherMapEnv_1 = require("./src/systemEnv/openWeatherMapEnv");
-var hoge = new ipinfoEnv_1.IpinfoEnv();
-hoge.toString();
-console.log();
-var tokoro = new tokoroEnv_1.TokoroEnv();
-tokoro.toString();
-console.log();
-var openWeatherMap = new openWeatherMapEnv_1.OpenWeatherMapEnv();
-openWeatherMap.toString();
+var ipinfoImpl_1 = require("./src/location/ipinfo/ipinfoImpl");
+var tokoroImpl_1 = require("./src/location/tokoro/tokoroImpl");
+var openWeatherMap_1 = require("./src/weather/openWeatherMap");
+var locationList = [];
+locationList.push(new ipinfoImpl_1.IpinfoImpl());
+locationList.push(new tokoroImpl_1.TokoroImpl());
+locationList.forEach(function (location) {
+    location.getLocation(function (latlon) {
+        var lat = latlon[0];
+        var lon = latlon[1];
+        var openWeatherMap = new openWeatherMap_1.OpenWeatherMap(lat, lon);
+        openWeatherMap.getWeather();
+    });
+});
