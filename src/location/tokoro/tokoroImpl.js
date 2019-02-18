@@ -1,23 +1,22 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const tokoro = require("tokoro");
-const tokoroEnv_1 = require("../../systemEnv/tokoroEnv");
+exports.__esModule = true;
+var tokoro = require("tokoro");
+var tokoroEnv_1 = require("../../systemEnv/tokoroEnv");
 ;
-class TokoroImpl {
-    constructor() {
+var TokoroImpl = /** @class */ (function () {
+    function TokoroImpl() {
         this.env = new tokoroEnv_1.TokoroEnv();
     }
-    getLocation(callback) {
+    TokoroImpl.prototype.getLocation = function (callback) {
         if (this.env.address === null) {
             return;
         }
         for (var key in this.env.address) {
-            console.log(this.env.address[key]);
-            tokoro(this.env.address[key], code => {
+            tokoro(this.env.address[key], function (code) {
                 callback(code);
             });
         }
-    }
-}
+    };
+    return TokoroImpl;
+}());
 exports.TokoroImpl = TokoroImpl;
-//# sourceMappingURL=tokoroImpl.js.map

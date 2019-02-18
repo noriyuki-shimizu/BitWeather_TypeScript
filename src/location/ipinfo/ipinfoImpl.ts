@@ -15,7 +15,11 @@ export class IpinfoImpl implements Location {
             method : 'GET',
             url    : this.env.requestUrl,
             params : { token : this.env.requestGetToken }
-        }).then(response => callback(response.data));
+        }).then(response => {
+            const loc: string = response.data.loc;
+            
+            callback(loc.split(','));
+        });
     }
 }
 
