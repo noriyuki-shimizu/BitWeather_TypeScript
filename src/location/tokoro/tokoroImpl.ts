@@ -3,7 +3,7 @@ import * as tokoro from 'tokoro';
 import { Location } from '../location'
 import { TokoroEnv } from '../../systemEnv/tokoroEnv';
 
-interface CallbackType{(location :any) :void};
+interface CallbackType{(latlon :{lat: number; lon: number}, address: string) :void};
 
 export class TokoroImpl implements Location {
     private env: TokoroEnv = new TokoroEnv();
@@ -17,7 +17,12 @@ export class TokoroImpl implements Location {
 
         for(var key in this.env.address) {
             tokoro(this.env.address[key], code => {
-                callback(code);
+                const latlon: {lat: number; lon: number} = {
+                    lat: code[0],
+                    lon: code[1]
+                };
+
+                callback(latlon, this.env.address[key]);
             });
         }
     }

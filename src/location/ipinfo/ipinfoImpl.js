@@ -1,22 +1,27 @@
 "use strict";
-exports.__esModule = true;
-var axios_1 = require("axios");
-var ipinfoEnv_1 = require("../../systemEnv/ipinfoEnv");
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = require("axios");
+const ipinfoEnv_1 = require("../../systemEnv/ipinfoEnv");
 ;
-var IpinfoImpl = /** @class */ (function () {
-    function IpinfoImpl() {
+class IpinfoImpl {
+    constructor() {
         this.env = new ipinfoEnv_1.IpinfoEnv();
     }
-    IpinfoImpl.prototype.getLocation = function (callback) {
-        axios_1["default"]({
+    getLocation(callback) {
+        axios_1.default({
             method: 'GET',
             url: this.env.requestUrl,
             params: { token: this.env.requestGetToken }
-        }).then(function (response) {
-            var loc = response.data.loc;
-            callback(loc.split(','));
+        }).then(response => {
+            const location = response.data.loc;
+            const latlonList = location.split(',');
+            const latlon = {
+                lat: latlonList[0],
+                lon: latlonList[1]
+            };
+            callback(latlon, '現在地');
         });
-    };
-    return IpinfoImpl;
-}());
+    }
+}
 exports.IpinfoImpl = IpinfoImpl;
+//# sourceMappingURL=ipinfoImpl.js.map

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Location } from '../location'
 import { IpinfoEnv } from '../../systemEnv/ipinfoEnv';
 
-interface CallbackType{(location :any) :void};
+interface CallbackType{(latlon: {lat: string; lon: string}, address: string) :void};
 
 export class IpinfoImpl implements Location {
     private env: IpinfoEnv = new IpinfoEnv();
@@ -16,9 +16,15 @@ export class IpinfoImpl implements Location {
             url    : this.env.requestUrl,
             params : { token : this.env.requestGetToken }
         }).then(response => {
-            const loc: string = response.data.loc;
+            const location: string = response.data.loc;
+            const latlonList: string[] = location.split(',');
+
+            const latlon: {lat: string; lon: string} = {
+                lat: latlonList[0],
+                lon: latlonList[1]
+            }
             
-            callback(loc.split(','));
+            callback(latlon, '現在地');
         });
     }
 }
