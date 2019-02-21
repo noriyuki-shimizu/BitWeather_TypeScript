@@ -63,11 +63,10 @@ export class ConditionCodes {
         {id: 804, meaning: '曇り', icon: '☁️'},
     ]);
 
-    constructor() {}
-
     public get(weatherId: number): {id: number; meaning: string; icon: string} {
         return this.conditionCodeList.find(conditionCode => {
             return weatherId === conditionCode.id;
         });
     }
+
 }
