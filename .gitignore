@@ -63,3 +63,6 @@ typings/
 # intellij info
 .idea/
 BitWeather.iml
+
+*.js
+*.map
