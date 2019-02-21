@@ -16,13 +16,14 @@ export class TokoroImpl implements Location {
         }
 
         for(var key in this.env.address) {
+            const address = this.env.address[key];
             tokoro(this.env.address[key], code => {
                 const latlon: {lat: number; lon: number} = {
                     lat: code[0],
                     lon: code[1]
                 };
 
-                callback(latlon, this.env.address[key]);
+                callback(latlon, address);
             });
         }
     }
