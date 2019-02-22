@@ -16,16 +16,16 @@ export class OpenWeatherMapConvert implements Convert {
 
     public convert(): ConvertWeatherData[] {
 
-        var addressGroup: any = this.grouping();
+        var dateGroup: any = this.grouping();
 
-        const groupKeyList: string[] = Object.keys(addressGroup);
+        const groupKeyList: string[] = Object.keys(dateGroup);
         var convertWeatherDataList: ConvertWeatherData[] = [];
 
-        groupKeyList.map(groupKey => {
+        groupKeyList.forEach(groupKey => {
             var convertWeatherData: ConvertWeatherData = new ConvertWeatherData();
 
-            convertWeatherData.address = groupKey;
-            
+            convertWeatherData.address = this.address;
+
             var weatherCnt: any = {};
             var tempMaxList: number[] = [];
             var tempMinList: number[] = [];
@@ -35,25 +35,25 @@ export class OpenWeatherMapConvert implements Convert {
             var rainList: number[] = [];
             var snowList: number[] = [];
             
-            const addressWeatherList = addressGroup[groupKey].list;
-            addressWeatherList.forEach(addressWeather => {
-                var greenwich: TimeDiff = new Greenwich(addressWeather.dt_txt);
+            const dateWeatherList = dateGroup[groupKey];
+            dateWeatherList.forEach(dateWeather => {
+                var greenwich: TimeDiff = new Greenwich(dateWeather.dt_txt);
                 convertWeatherData.date = greenwich.getFormatDate();
 
                 if(convertWeatherData.temp === null) {
-                    convertWeatherData.temp = `現在の気温：${addressWeather.main.temp}℃`
+                    convertWeatherData.temp = `現在の気温：${dateWeather.main.temp}℃`
                 }
 
-                var key: number = addressWeather.weather[0].id;
+                var key: number = dateWeather.weather[0].id;
                 weatherCnt[key] = weatherCnt[key] !== undefined ? weatherCnt[key] + 1 : 1;
 
-                tempMaxList.push(addressWeather.main.temp_max);
-                tempMinList.push(addressWeather.main.temp_min);
-                humidityList.push(addressWeather.main.humidity);
-                windDegList.push(addressWeather.wind.deg);
-                windSpeedList.push(addressWeather.wind.speed);
-                rainList.push(addressWeather.rain !== undefined ? addressWeather.rain['3h'] : 0);
-                snowList.push(addressWeather.snow !== undefined ? addressWeather.snow['3h'] : 0);
+                tempMaxList.push(dateWeather.main.temp_max);
+                tempMinList.push(dateWeather.main.temp_min);
+                humidityList.push(dateWeather.main.humidity);
+                windDegList.push(dateWeather.wind.deg);
+                windSpeedList.push(dateWeather.wind.speed);
+                rainList.push(dateWeather.rain !== undefined ? dateWeather.rain['3h'] : 0);
+                snowList.push(dateWeather.snow !== undefined ? dateWeather.snow['3h'] : 0);
                 
             });
 
@@ -88,13 +88,10 @@ export class OpenWeatherMapConvert implements Convert {
         var addressGroup: any = {};
         this.weatherDataList.forEach(weatherData => {
             var dateTextList = weatherData.dt_txt.split(' ');
-            if(addressGroup[this.address] === undefined) {
-                addressGroup[this.address] = {};
+            if(addressGroup[dateTextList[0]] === undefined) {
+                addressGroup[dateTextList[0]] = [];
             }
-            if(addressGroup[this.address][dateTextList[0]] === undefined) {
-                addressGroup[this.address][dateTextList[0]] = [];
-            }
-            addressGroup[this.address][dateTextList[0]].push(weatherData);
+            addressGroup[dateTextList[0]].push(weatherData);
         });
 
         return addressGroup;
