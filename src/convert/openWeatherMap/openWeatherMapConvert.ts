@@ -87,14 +87,15 @@ export class OpenWeatherMapConvert implements Convert {
     private grouping(): any {
         var addressGroup: any = {};
         this.weatherDataList.forEach(weatherData => {
+            var dateTextList = weatherData.dt_txt.split(' ');
             if(addressGroup[this.address] === undefined) {
-                addressGroup[this.address] = {
-                    list: []
-                };
+                addressGroup[this.address] = {};
             }
-            addressGroup[this.address].list.push(weatherData);
+            if(addressGroup[this.address][dateTextList[0]] === undefined) {
+                addressGroup[this.address][dateTextList[0]] = [];
+            }
+            addressGroup[this.address][dateTextList[0]].push(weatherData);
         });
-        console.log(addressGroup);
 
         return addressGroup;
     }
