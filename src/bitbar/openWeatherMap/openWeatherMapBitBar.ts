@@ -1,53 +1,15 @@
 import * as bitbar from 'bitbar';
 
-import { ConvertWeatherData } from '../../convert/openWeatherMap/convertWeatherData';
-
 export class OpenWeatherMapBitBar {
-    private weatherDataList: ConvertWeatherData[];
+    private subMenuList: {text: string; color: string}[];
     private address: string;
 
-    constructor(weatherDataList: ConvertWeatherData[], address: string) {
-        this.weatherDataList = weatherDataList;
+    constructor(subMenuList: {text: string; color: string}[], address: string) {
+        this.subMenuList = subMenuList;
         this.address = address;
     }
 
     public display(): void {
-        var subMenukList = [];
-        this.weatherDataList.forEach(weatherData => {
-            subMenukList.push(
-                {
-                    text: weatherData.date,
-                    color: 'black',
-                    submenu: [
-                        {
-                            text: weatherData.weather,
-                            color: 'black'
-                        },
-                        {
-                            text: weatherData.temp,
-                            color: 'black'
-                        },
-                        {
-                            text: weatherData.tempMin,
-                            color: 'black'
-                        },
-                        {
-                            text: weatherData.tempMax,
-                            color: 'black'
-                        },
-                        {
-                            text: weatherData.humidity,
-                            color: 'black'
-                        },
-                        {
-                            text: weatherData.wind,
-                            color: 'black'
-                        }
-                    ] 
-                }
-            );
-        });
-
         bitbar([
             {
                 text: '🌞',
@@ -57,7 +19,7 @@ export class OpenWeatherMapBitBar {
             {
                 text: this.address,
                 color: 'black',
-                submenu: subMenukList
+                submenu: this.subMenuList 
             }
         ]);
         
