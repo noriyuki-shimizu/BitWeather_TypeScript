@@ -1,121 +1,98 @@
 import { Convert } from '../convert';
-import { ConditionCodes } from '../../weather/parts/conditionCodes/conditionCodes';
-import { WindDigree } from '../../weather/parts/windDigree/windDigree';
-import { TimeDiff } from '../../timeDiff/timeDiff';
-import { Greenwich } from '../../timeDiff/greenwith/greenwich'
-import { ConvertWeatherData } from './convertWeatherData';
+import { TimeDiff } from '../../date/timeDiff/timeDiff';
+import { Greenwich } from '../../date/timeDiff/greenwith/greenwich'
+import { Format } from '../../date/format/format';
+import { AggregateWeatherData } from './aggregateWeatherData';
 
 export class OpenWeatherMapConvert implements Convert {
-    private address: string;
     private weatherDataList: any[];
 
-    constructor(weatherDataList: any[], address: string) {
-        this.weatherDataList = weatherDataList;
-        this.address = address;
+    private readonly formatStr: string = 'YYYY/MM/DD (ddd)';
+
+    constructor(weatherDataList: any[]) {
+        const format: Format = new Format(this.formatStr);
+
+        var groupingList: any[] = [];
+        weatherDataList.forEach(weatherData => {
+            const greenwich: TimeDiff = new Greenwich(weatherData.dt_txt);
+            const formatDate: string = format.getFormatDate(greenwich.getDate());
+
+            if(groupingList[formatDate] === undefined) {
+                groupingList[formatDate] = [];
+            }
+            groupingList[formatDate].push(weatherData);
+        });
+
+        this.weatherDataList = groupingList;
     }
 
-    public convert(): ConvertWeatherData[] {
+    public convert(): {text: string; color: string; submenu: []}[] {
+        const groupKeyList: string[] = Object.keys(this.weatherDataList);
 
-        var dateGroup: any = this.grouping();
+        var convertList: {text: string; color: string; submenu: any}[] = [];
 
-        const groupKeyList: string[] = Object.keys(dateGroup);
-        var convertWeatherDataList: ConvertWeatherData[] = [];
+        groupKeyList.forEach((groupKey, index) => {
+            var convertWeatherData: AggregateWeatherData = new AggregateWeatherData(this.weatherDataList[groupKey]);
 
-        groupKeyList.forEach(groupKey => {
-            var convertWeatherData: ConvertWeatherData = new ConvertWeatherData();
+            var submenu: {text: string; color: string}[];
 
-            convertWeatherData.address = this.address;
-
-            var weatherCnt: any = {};
-            var tempMaxList: number[] = [];
-            var tempMinList: number[] = [];
-            var humidityList: number[] = [];
-            var windDegList: number[] = [];
-            var windSpeedList: number[] = [];
-            var rainList: number[] = [];
-            var snowList: number[] = [];
-            
-            const dateWeatherList = dateGroup[groupKey];
-            dateWeatherList.forEach(dateWeather => {
-                var greenwich: TimeDiff = new Greenwich(dateWeather.dt_txt);
-                convertWeatherData.date = greenwich.getFormatDate();
-
-                if(convertWeatherData.temp === null) {
-                    convertWeatherData.temp = `現在の気温：${dateWeather.main.temp}℃`
+            submenu = [
+                {
+                    text: convertWeatherData.getWeather(),
+                    color: 'black'
+                },
+                {
+                    text: convertWeatherData.getTempMin(),
+                    color: 'black'
+                },
+                {
+                    text: convertWeatherData.getTempMax(),
+                    color: 'black'
+                },
+                {
+                    text: convertWeatherData.getHumidity(),
+                    color: 'black'
+                },
+                {
+                    text: convertWeatherData.getWind(),
+                    color: 'black'
                 }
+            ];
 
-                var key: number = dateWeather.weather[0].id;
-                weatherCnt[key] = weatherCnt[key] !== undefined ? weatherCnt[key] + 1 : 1;
+            if(index === 0) {
+                const todayWeatherDataList = this.weatherDataList[groupKey];
+                const todayTemp: number = todayWeatherDataList[0].main.temp;
 
-                tempMaxList.push(dateWeather.main.temp_max);
-                tempMinList.push(dateWeather.main.temp_min);
-                humidityList.push(dateWeather.main.humidity);
-                windDegList.push(dateWeather.wind.deg);
-                windSpeedList.push(dateWeather.wind.speed);
-                rainList.push(dateWeather.rain !== undefined ? dateWeather.rain['3h'] : 0);
-                snowList.push(dateWeather.snow !== undefined ? dateWeather.snow['3h'] : 0);
-                
-            });
-
-            const conditionCode = this.getMostFrequentWeather(weatherCnt);
-            convertWeatherData.weather = `${conditionCode.icon} ${conditionCode.meaning}`;
-
-            convertWeatherData.tempMax = `最高気温：${Math.max.apply(null, tempMaxList)}℃`;
-            convertWeatherData.tempMin = `最低気温：${Math.min.apply(null, tempMinList)}℃`;
-            convertWeatherData.humidity = `湿度：${this.average(humidityList)} %`;
-            
-            var windSpeed = this.average(windSpeedList);
-            var windDeg = this.average(windDegList);
-            const digree: {f:number; t: number; windDigree: string} = new WindDigree().get(windDeg);
-            convertWeatherData.wind = `風： ${windSpeed}m(${digree.windDigree})`;
-
-            convertWeatherData.rain = ``;
-            if(this.sum(rainList) > 0) {
-                convertWeatherData.rain = `過去3時間の平均雨量：${this.average(rainList)} mm`;
+                submenu.splice(1, 0, {
+                    text: convertWeatherData.getFormatTodayTemp(todayTemp),
+                    color: 'black'
+                });
             }
 
-            convertWeatherData.snow = ``;
-            if(this.sum(snowList) > 0) {
-                convertWeatherData.snow = `過去3時間の平均積雪量：${this.average(snowList)}`;
+            if(!convertWeatherData.isRainEmpty()) {
+                submenu.push({
+                    text: convertWeatherData.getRain(),
+                    color: 'black'
+                });
             }
 
-            convertWeatherDataList.push(convertWeatherData);
-        });
-        return convertWeatherDataList;
-    }
-
-    private grouping(): any {
-        var addressGroup: any = {};
-        this.weatherDataList.forEach(weatherData => {
-            var dateTextList = weatherData.dt_txt.split(' ');
-            if(addressGroup[dateTextList[0]] === undefined) {
-                addressGroup[dateTextList[0]] = [];
+            if(!convertWeatherData.isSnowEmpty()) {
+                submenu.push({
+                    text: convertWeatherData.getSnow(),
+                    color: 'black'
+                });
             }
-            addressGroup[dateTextList[0]].push(weatherData);
-        });
 
-        return addressGroup;
-    }
-
-    private getMostFrequentWeather(weatherCnt: any): {id: number; meaning: string; icon: string} {
-        var mostWeatherIdCnt: number = 0;
-            var mostWeatherId: number;
-            for (var key in weatherCnt) {
-                if(weatherCnt[key] > mostWeatherIdCnt) {
-                    mostWeatherIdCnt = weatherCnt[key];
-                    mostWeatherId = Number(key);
+            convertList.push(
+                {
+                    text: groupKey,
+                    color: 'black',
+                    submenu: submenu
                 }
-            }
-            return new ConditionCodes().get(mostWeatherId);
-    }
-
-    private sum(numList: number[]): number {
-        return numList.reduce((prev, current) => {
-            return prev+current;
+            );
         });
+
+        return convertList;
     }
 
-    private average(numList: number[]): number {
-        return this.sum(numList) / numList.length;
-    }
 }
