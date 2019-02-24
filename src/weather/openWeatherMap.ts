@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { OpenWeatherMapEnv } from '../systemEnv/openWeatherMapEnv';
+import { OpenWeatherMapEnv } from '../systemEnv/openWeatherMap/openWeatherMapEnv';
 
 interface CallbackType{(weatherDataList: any[]) :void};
 

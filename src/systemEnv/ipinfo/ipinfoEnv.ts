@@ -1,4 +1,4 @@
-import { Env } from "./env";
+import { Env } from "../env";
 
 export class IpinfoEnv extends Env {
 	public readonly requestUrl: string;

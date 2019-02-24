@@ -1,4 +1,4 @@
-import { Env } from "./env";
+import { Env } from "../env";
   
 export class TokoroEnv extends Env {
         public readonly address: any;

@@ -1,7 +1,7 @@
 import * as tokoro from 'tokoro';
 
 import { Location } from '../location'
-import { TokoroEnv } from '../../systemEnv/tokoroEnv';
+import { TokoroEnv } from '../../systemEnv/tokoro/tokoroEnv';
 
 interface CallbackType{(latlon :{lat: number; lon: number}, address: string) :void};
 
