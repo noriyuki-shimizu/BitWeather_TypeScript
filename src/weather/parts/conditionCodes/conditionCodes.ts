@@ -1,4 +1,10 @@
 
+/**
+ * 天気の状態取得に関するクラス。
+ *
+ * @export
+ * @class ConditionCodes
+ */
 export class ConditionCodes {
     private readonly conditionCodeList: any = Object.freeze([
         {id: 200, meaning: '小雨と雷雨', icon: '⛈'},

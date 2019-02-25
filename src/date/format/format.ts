@@ -1,5 +1,11 @@
 import * as dateAndTime from 'date-and-time';
 
+/**
+ * 日時のフォーマットに関するクラス。
+ *
+ * @export
+ * @class Format
+ */
 export class Format {
     private formatStr: string;
 

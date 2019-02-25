@@ -4,6 +4,12 @@ import { OpenWeatherMapEnv } from '../systemEnv/openWeatherMap/openWeatherMapEnv
 
 interface CallbackType{(weatherDataList: any[]) :void};
 
+/**
+ * OpenWeatherMap API操作に関するクラス。
+ *
+ * @export
+ * @class OpenWeatherMap
+ */
 export class OpenWeatherMap {
     private env: OpenWeatherMapEnv = new OpenWeatherMapEnv();
     private address: string;

@@ -1,5 +1,12 @@
 import { Env } from "../env";
 
+/**
+ * OpenWeatherMapの設定ファイル読み込みに関するクラス。
+ *
+ * @export
+ * @class OpenWeatherMapEnv
+ * @extends {Env}
+ */
 export class OpenWeatherMapEnv extends Env {
 	public readonly url:string;
 	public readonly param:{

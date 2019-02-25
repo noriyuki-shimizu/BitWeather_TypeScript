@@ -1,5 +1,11 @@
 
-export abstract class TimeDiff {
+/**
+ * 時差に関するクラス。
+ *
+ * @export
+ * @class TimeDiff
+ */
+export class TimeDiff {
     protected date: Date;
 
     constructor(dateStr: string, timeDiff: number) {

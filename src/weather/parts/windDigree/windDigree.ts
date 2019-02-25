@@ -1,4 +1,10 @@
 
+/**
+ * 風向き取得に関するクラス。
+ *
+ * @export
+ * @class WindDigree
+ */
 export class WindDigree {
     private readonly windDigreeList: any = Object.freeze([
         {f: 337.5, t: 382.5, windDigree: '北'},

@@ -1,5 +1,11 @@
 import * as bitbar from 'bitbar';
 
+/**
+ * bitbarを用いた天気予報の表示に関するクラス。
+ *
+ * @export
+ * @class OpenWeatherMapBitBar
+ */
 export class OpenWeatherMapBitBar {
     private subMenuList: {text: string; color: string}[];
     private address: string;
@@ -9,6 +15,11 @@ export class OpenWeatherMapBitBar {
         this.address = address;
     }
 
+    /**
+     * 天気予報を表示します。
+     *
+     * @memberof OpenWeatherMapBitBar
+     */
     public display(): void {
         bitbar([
             {

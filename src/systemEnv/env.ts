@@ -1,6 +1,12 @@
 import * as fs from 'fs';
 import * as yaml from 'yaml';
 
+/**
+ * 設定ファイル読み込みに関するクラス。
+ *
+ * @export
+ * @class Env
+ */
 export class Env {
 
 	private yamlPropertys: {ipinfo: any; tokoro: any; openweathermap: any;};

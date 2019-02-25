@@ -5,6 +5,13 @@ import { TokoroEnv } from '../../systemEnv/tokoro/tokoroEnv';
 
 interface CallbackType{(latlon :{lat: number; lon: number}, address: string) :void};
 
+/**
+ * tokoroライブラリを用いた住所変換に関するクラス。
+ *
+ * @export
+ * @class TokoroImpl
+ * @implements {Location}
+ */
 export class TokoroImpl implements Location {
     private env: TokoroEnv = new TokoroEnv();
     

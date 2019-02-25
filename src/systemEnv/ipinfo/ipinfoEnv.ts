@@ -1,5 +1,12 @@
 import { Env } from "../env";
 
+/**
+ * ipInfoでの設定ファイル読み込みに関するクラス。
+ *
+ * @export
+ * @class IpinfoEnv
+ * @extends {Env}
+ */
 export class IpinfoEnv extends Env {
 	public readonly requestUrl: string;
 	public readonly requestGetToken: string;

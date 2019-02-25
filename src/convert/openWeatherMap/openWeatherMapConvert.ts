@@ -4,6 +4,13 @@ import { Greenwich } from '../../date/timeDiff/greenwith/greenwich'
 import { Format } from '../../date/format/format';
 import { AggregateWeatherData } from './aggregateWeatherData';
 
+/**
+ * APIから取得されたデータを変換するクラス。
+ *
+ * @export
+ * @class OpenWeatherMapConvert
+ * @implements {Convert}
+ */
 export class OpenWeatherMapConvert implements Convert {
     private weatherDataList: any[];
 

@@ -1,6 +1,12 @@
 import { ConditionCodes } from '../../weather/parts/conditionCodes/conditionCodes';
 import { WindDigree } from '../../weather/parts/windDigree/windDigree';
 
+/**
+ * 取得された天気データの集計に関するクラス。
+ *
+ * @export
+ * @class AggregateWeatherData
+ */
 export class AggregateWeatherData {
 
     private weatherCnt: any = {};
@@ -28,7 +34,7 @@ export class AggregateWeatherData {
             
         });
     }
-
+    
     private isObjectEmpty(obj: {}): boolean {
         return obj === undefined || 0 === Object.keys(obj).length;
     }

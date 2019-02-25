@@ -5,6 +5,13 @@ import { IpinfoEnv } from '../../systemEnv/ipinfo/ipinfoEnv';
 
 interface CallbackType{(latlon: {lat: string; lon: string}, address: string) :void};
 
+/**
+ * ipInfoに関するクラス。
+ *
+ * @export
+ * @class IpinfoImpl
+ * @implements {Location}
+ */
 export class IpinfoImpl implements Location {
     private env: IpinfoEnv = new IpinfoEnv();
     
