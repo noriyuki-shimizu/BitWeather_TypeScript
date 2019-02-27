@@ -2,7 +2,7 @@ import { Convert } from '../convert';
 import { TimeDiff } from '../../date/timeDiff/timeDiff';
 import { Greenwich } from '../../date/timeDiff/greenwith/greenwich'
 import { Format } from '../../date/format/format';
-import { AggregateWeatherData } from './aggregateWeatherData';
+import { AggregateWeatherData } from './formatWeather/aggregate/aggregateWeatherData';
 
 /**
  * APIから取得されたデータを変換するクラス。
