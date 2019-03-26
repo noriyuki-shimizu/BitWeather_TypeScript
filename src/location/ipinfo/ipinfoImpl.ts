@@ -2,8 +2,7 @@ import axios from 'axios'
 
 import { Location } from '../location'
 import { IpinfoEnv } from '../../systemEnv/ipinfo/ipinfoEnv';
-
-interface CallbackType{(latlon: {lat: string; lon: string}, address: string) :void};
+import { CallbackType } from '../callbackType';
 
 /**
  * ipInfoに関するクラス。

@@ -2,8 +2,7 @@ import * as tokoro from 'tokoro';
 
 import { Location } from '../location'
 import { TokoroEnv } from '../../systemEnv/tokoro/tokoroEnv';
-
-interface CallbackType{(latlon :{lat: number; lon: number}, address: string) :void};
+import { CallbackType } from '../callbackType';
 
 /**
  * tokoroライブラリを用いた住所変換に関するクラス。
