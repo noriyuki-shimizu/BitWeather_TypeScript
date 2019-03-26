@@ -23,7 +23,7 @@ export class OpenWeatherMapBitBar {
     public display(): void {
         bitbar([
             {
-                text: '🌞',
+                text: '☀️',
                 dropdown: false
             },
             bitbar.separator,
