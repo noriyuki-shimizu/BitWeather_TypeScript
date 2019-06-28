@@ -1,0 +1,24 @@
+{
+    "defaultSeverity": "warning",
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-prettier"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "node_modules/**"
+        ]
+    },
+    "rulesDirectory": ["tslint-plugin-prettier"],
+    "rules": {
+        "prettier": true,
+        "interface-name": false,
+        "ordered-imports": false,
+        "object-literal-sort-keys": false,
+        "no-consecutive-blank-lines": false,
+        "interface-over-type-literal": false,
+        "no-console": [
+            false
+        ]
+    }
+}

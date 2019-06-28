@@ -1,5 +1,5 @@
-import { Env } from "./env";
-  
+import { Env } from './env';
+
 /**
  * tokoroを使用する際の設定ファイル読み込みに関するクラス。
  *
@@ -8,13 +8,13 @@ import { Env } from "./env";
  * @extends {Env}
  */
 export class TokoroEnv extends Env {
-        public readonly address: any;
+  public readonly address: any;
 
-        constructor() {
-                super();
-                this.address = super.load('tokoro.address');
-        }
-        public toString(): void {
-                console.log('address: ' + this.address);
-        }
+  constructor() {
+    super();
+    this.address = super.load('tokoro.address');
+  }
+  public toString(): void {
+    console.log('address: ' + this.address);
+  }
 }

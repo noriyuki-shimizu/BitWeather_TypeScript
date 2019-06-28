@@ -1,4 +1,3 @@
-
 /**
  * 風向き取得に関するクラス。
  *
@@ -6,26 +5,26 @@
  * @class WindDigree
  */
 export class WindDigree {
-    private readonly windDigreeList: any = Object.freeze([
-        {f: 337.5, t: 382.5, windDigree: '北'},
-        {f: 22.5, t: 67.5, windDigree: '北東'},
-        {f: 67.5, t: 112.5, windDigree: '東'},
-        {f: 112.5, t: 157.5, windDigree: '南東'},
-        {f: 157.5, t: 202.5, windDigree: '南'},
-        {f: 202.5, t: 247.5, windDigree: '南西'},
-        {f: 247.5, t: 292.5, windDigree: '西'},
-        {f: 292.5, t: 337.5, windDigree: '北西'}
-    ]);
+  private readonly windDigreeList: any = Object.freeze([
+    { f: 337.5, t: 382.5, windDigree: '北' },
+    { f: 22.5, t: 67.5, windDigree: '北東' },
+    { f: 67.5, t: 112.5, windDigree: '東' },
+    { f: 112.5, t: 157.5, windDigree: '南東' },
+    { f: 157.5, t: 202.5, windDigree: '南' },
+    { f: 202.5, t: 247.5, windDigree: '南西' },
+    { f: 247.5, t: 292.5, windDigree: '西' },
+    { f: 292.5, t: 337.5, windDigree: '北西' }
+  ]);
 
-    constructor() {}
+  constructor() {}
 
-    public get(digree: number): {f:number; t: number; windDigree: string} {
-        if(digree < 22.5){
-            digree += 360;
-        }
-    
-        return this.windDigreeList.find(windDigree => {
-            return windDigree.f <= digree && digree < windDigree.t;
-        });
+  public get(digree: number): { f: number; t: number; windDigree: string } {
+    if (digree < 22.5) {
+      digree += 360;
     }
+
+    return this.windDigreeList.find(windDigree => {
+      return windDigree.f <= digree && digree < windDigree.t;
+    });
+  }
 }

@@ -1,4 +1,3 @@
-
 /**
  * データ変換処理に関するインターフェース。
  *
@@ -6,5 +5,5 @@
  * @interface Convert
  */
 export interface Convert {
-    convert(): {text: string; color: string; submenu: []}[];
+  convert(): Array<{ text: string; color: string; submenu: [] }>;
 }

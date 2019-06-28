@@ -7,32 +7,34 @@ import * as bitbar from 'bitbar';
  * @class OpenWeatherMapBitBar
  */
 export class OpenWeatherMapBitBar {
-    private subMenuList: {text: string; color: string}[];
-    private address: string;
+  private subMenuList: Array<{ text: string; color: string }>;
+  private address: string;
 
-    constructor(subMenuList: {text: string; color: string}[], address: string) {
-        this.subMenuList = subMenuList;
-        this.address = address;
-    }
+  constructor(
+    subMenuList: Array<{ text: string; color: string }>,
+    address: string
+  ) {
+    this.subMenuList = subMenuList;
+    this.address = address;
+  }
 
-    /**
-     * 天気予報を表示します。
-     *
-     * @memberof OpenWeatherMapBitBar
-     */
-    public display(): void {
-        bitbar([
-            {
-                text: '☀️',
-                dropdown: false
-            },
-            bitbar.separator,
-            {
-                text: this.address,
-                color: 'black',
-                submenu: this.subMenuList 
-            }
-        ]);
-        
-    }
+  /**
+   * 天気予報を表示します。
+   *
+   * @memberof OpenWeatherMapBitBar
+   */
+  public display(): void {
+    bitbar([
+      {
+        text: '☀️',
+        dropdown: false
+      },
+      bitbar.separator,
+      {
+        text: this.address,
+        color: 'black',
+        submenu: this.subMenuList
+      }
+    ]);
+  }
 }

@@ -7,20 +7,19 @@ import * as dateAndTime from 'date-and-time';
  * @class Format
  */
 export class Format {
-    private formatStr: string;
+  private formatStr: string;
 
-    constructor(formatStr: string) {
-        this.formatStr = formatStr;
-    }
+  constructor(formatStr: string) {
+    this.formatStr = formatStr;
+  }
 
-    public getFormatDate(date: Date): string {
-        const formatDate = dateAndTime.format(date, this.formatStr);
+  public getFormatDate(date: Date): string {
+    const formatDate = dateAndTime.format(date, this.formatStr);
 
-        return formatDate;
-    }
+    return formatDate;
+  }
 
-    public getParseDate(formatDate: string): Date {
-        return dateAndTime.parse(formatDate, this.formatStr);
-    }
+  public getParseDate(formatDate: string): Date {
+    return dateAndTime.parse(formatDate, this.formatStr);
+  }
 }
-

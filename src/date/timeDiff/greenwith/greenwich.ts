@@ -9,9 +9,7 @@ import { TimeDiff } from '../timeDiff';
  * @extends {TimeDiff}
  */
 export class Greenwich extends TimeDiff {
-
-    constructor(dateStr: string) {
-        super(dateStr, 9);
-    }
-
+  constructor(dateStr: string) {
+    super(dateStr, 9);
+  }
 }
