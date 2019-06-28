@@ -5,19 +5,19 @@
  * @class TimeDiff
  */
 export class TimeDiff {
-  protected date: Date;
+    protected date: Date;
 
-  constructor(dateStr: string, timeDiff: number) {
-    this.date = new Date(dateStr);
+    constructor(dateStr: string, timeDiff: number) {
+        this.date = new Date(dateStr);
 
-    this.date.setHours(this.date.getHours() + timeDiff);
-  }
+        this.date.setHours(this.date.getHours() + timeDiff);
+    }
 
-  public getDate(): Date {
-    return this.date;
-  }
+    public getDate(): Date {
+        return this.date;
+    }
 
-  public isNowDate(): boolean {
-    return new Date().getDate === this.date.getDate;
-  }
+    public isNowDate(): boolean {
+        return new Date().getDate === this.date.getDate;
+    }
 }

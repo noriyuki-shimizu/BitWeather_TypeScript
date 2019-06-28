@@ -8,13 +8,13 @@ import { Env } from './env';
  * @extends {Env}
  */
 export class TokoroEnv extends Env {
-  public readonly address: any;
+    public readonly address: any;
 
-  constructor() {
-    super();
-    this.address = super.load('tokoro.address');
-  }
-  public toString(): void {
-    console.log('address: ' + this.address);
-  }
+    constructor() {
+        super();
+        this.address = super.load('tokoro.address');
+    }
+    public toString(): void {
+        console.log('address: ' + this.address);
+    }
 }

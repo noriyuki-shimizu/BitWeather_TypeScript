@@ -5,5 +5,5 @@
  * @interface Convert
  */
 export interface Convert {
-  convert(): Array<{ text: string; color: string; submenu: [] }>;
+    convert(): Array<{ text: string; color: string; submenu: [] }>;
 }

@@ -8,30 +8,33 @@ import { Convert } from './convert/convert';
 import { OpenWeatherMapConvert } from './convert/openWeatherMap/openWeatherMapConvert';
 import { OpenWeatherMapBitBar } from './bitbar/openWeatherMapBitBar';
 
-let locationList: Location[] = new Array();
+const locationList: Location[] = new Array();
 
 locationList.push(new IpinfoImpl());
 locationList.push(new TokoroImpl());
 
 locationList.forEach(location => {
-  location.getLocation((latlon, address) => {
-    const openWeatherMap: OpenWeatherMap = new OpenWeatherMap(latlon, address);
+    location.getLocation((latlon, address) => {
+        const openWeatherMap: OpenWeatherMap = new OpenWeatherMap(
+            latlon,
+            address
+        );
 
-    openWeatherMap.getWeather(weatherDataList => {
-      const openWeatherMapConvert: Convert = new OpenWeatherMapConvert(
-        weatherDataList
-      );
-      const convertWeatherData: Array<{
-        text: string;
-        color: string;
-        submenu: [];
-      }> = openWeatherMapConvert.convert();
+        openWeatherMap.getWeather(weatherDataList => {
+            const openWeatherMapConvert: Convert = new OpenWeatherMapConvert(
+                weatherDataList
+            );
+            const convertWeatherData: Array<{
+                text: string;
+                color: string;
+                submenu: [];
+            }> = openWeatherMapConvert.convert();
 
-      const openweatherMapBitBar: OpenWeatherMapBitBar = new OpenWeatherMapBitBar(
-        convertWeatherData,
-        address
-      );
-      openweatherMapBitBar.display();
+            const openweatherMapBitBar: OpenWeatherMapBitBar = new OpenWeatherMapBitBar(
+                convertWeatherData,
+                address
+            );
+            openweatherMapBitBar.display();
+        });
     });
-  });
 });

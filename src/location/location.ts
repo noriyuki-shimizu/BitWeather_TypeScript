@@ -5,5 +5,5 @@
  * @interface Location
  */
 export interface Location {
-  getLocation(callback: any): void;
+    getLocation(callback: any): void;
 }
