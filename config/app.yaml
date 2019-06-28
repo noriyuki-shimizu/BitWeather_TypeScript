@@ -5,6 +5,9 @@ ipinfo:
       token: '74c9d03c1c819b'
 tokoro:
   address:
+    home: '千葉県松戸市緑ケ丘1-131-6'
+    company: '東京都新宿区新宿4-3-25'
+    hiroshima: '広島県広島市南区松原町１'
   # If you want to specify an address, please add it below.
   # The following description is an example.
   # home: 'Home address'
@@ -13,7 +16,7 @@ openweathermap:
   request:
     url: 'http://api.openweathermap.org/data/2.5/forecast'
     get:
-      appID: '7d256fc0fef376a4972ed837a3a0c95a'
+      appID: '391e20f5701ca65f3cf9bc72fecb0456'
       cnt: '40'
       units: 'metric'
       mode: 'json'

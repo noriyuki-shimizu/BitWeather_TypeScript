@@ -1,12 +1,12 @@
 #!/usr/local/bin/node
 
-import { Location } from './src/location/location';
-import { IpinfoImpl } from './src/location/ipinfo/ipinfoImpl';
-import { TokoroImpl } from './src/location/tokoro/tokoroImpl';
-import { OpenWeatherMap } from './src/weather/openWeatherMap';
-import { Convert } from './src/convert/convert';
-import { OpenWeatherMapConvert } from './src/convert/openWeatherMap/openWeatherMapConvert';
-import { OpenWeatherMapBitBar } from './src/bitbar/openWeatherMap/openWeatherMapBitBar';
+import { Location } from './location/location';
+import { IpinfoImpl } from './location/ipinfoImpl';
+import { TokoroImpl } from './location/tokoroImpl';
+import { OpenWeatherMap } from './weather/openWeatherMap';
+import { Convert } from './convert/convert';
+import { OpenWeatherMapConvert } from './convert/openWeatherMap/openWeatherMapConvert';
+import { OpenWeatherMapBitBar } from './bitbar/openWeatherMapBitBar';
 
 var locationList: Location[] = new Array();
 

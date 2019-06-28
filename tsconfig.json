@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2018",
+    "outDir": "./dist",
     "charset": "utf8",
     "typeRoots": [
       "node_modules/@types"
@@ -11,6 +12,5 @@
   },
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
-

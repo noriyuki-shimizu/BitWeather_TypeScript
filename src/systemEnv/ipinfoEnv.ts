@@ -1,4 +1,4 @@
-import { Env } from "../env";
+import { Env } from "./env";
 
 /**
  * ipInfoでの設定ファイル読み込みに関するクラス。

@@ -64,5 +64,4 @@ typings/
 .idea/
 BitWeather.iml
 
-*.js
-*.map
+dist

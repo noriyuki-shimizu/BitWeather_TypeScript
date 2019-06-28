@@ -1,4 +1,4 @@
-import { Env } from "../env";
+import { Env } from "./env";
   
 /**
  * tokoroを使用する際の設定ファイル読み込みに関するクラス。

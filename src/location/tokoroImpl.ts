@@ -1,8 +1,8 @@
 import * as tokoro from 'tokoro';
 
-import { Location } from '../location'
-import { TokoroEnv } from '../../systemEnv/tokoro/tokoroEnv';
-import { CallbackType } from '../callbackType';
+import { Location } from './location'
+import { TokoroEnv } from '../systemEnv/tokoroEnv';
+import { CallbackType } from './callbackType';
 
 /**
  * tokoroライブラリを用いた住所変換に関するクラス。

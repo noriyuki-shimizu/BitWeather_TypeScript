@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-import { Location } from '../location'
-import { IpinfoEnv } from '../../systemEnv/ipinfo/ipinfoEnv';
-import { CallbackType } from '../callbackType';
+import { Location } from './location'
+import { IpinfoEnv } from './../systemEnv/ipinfoEnv';
+import { CallbackType } from './callbackType';
 
 /**
  * ipInfoに関するクラス。
