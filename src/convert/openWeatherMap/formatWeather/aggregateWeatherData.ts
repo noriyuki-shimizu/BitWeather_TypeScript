@@ -1,5 +1,5 @@
-import { ConditionCodes } from '../../../../weather/parts/conditionCodes';
-import { WindDigree } from '../../../../weather/parts/windDigree';
+import { ConditionCodes } from '../../../weather/parts/conditionCodes';
+import { WindDigree } from '../../../weather/parts/windDigree';
 
 /**
  * 取得された天気データの集計に関するクラス。
