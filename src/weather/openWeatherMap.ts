@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { OpenWeatherMapEnv } from '../systemEnv/openWeatherMapEnv';
 
+type LatLon = { lat: number | string; lon: number | string };
 type CallbackType = (weatherDataList: any[]) => void;
 
 /**
@@ -13,12 +14,10 @@ type CallbackType = (weatherDataList: any[]) => void;
 export class OpenWeatherMap {
     private env: OpenWeatherMapEnv = new OpenWeatherMapEnv();
     private address: string;
+    private latlon: LatLon;
 
-    constructor(
-        latlon: { lat: number | string; lon: number | string },
-        address: string
-    ) {
-        Object.assign(this.env.param, latlon);
+    constructor(latlon: LatLon, address: string) {
+        this.latlon = latlon;
         this.address = address;
     }
 
@@ -26,7 +25,7 @@ export class OpenWeatherMap {
         axios({
             method: 'GET',
             url: this.env.url,
-            params: this.env.param
+            params: { ...this.env.param, ...this.latlon }
         }).then(response => callback(response.data.list));
     }
 }
