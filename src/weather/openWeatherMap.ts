@@ -13,12 +13,10 @@ type CallbackType = (weatherDataList: any[]) => void;
  */
 export class OpenWeatherMap {
     private env: OpenWeatherMapEnv = new OpenWeatherMapEnv();
-    private address: string;
     private latlon: LatLon;
 
-    constructor(latlon: LatLon, address: string) {
+    constructor(latlon: LatLon) {
         this.latlon = latlon;
-        this.address = address;
     }
 
     public getWeather(callback: CallbackType): void {

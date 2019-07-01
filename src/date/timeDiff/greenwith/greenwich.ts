@@ -9,7 +9,11 @@ import { TimeDiff } from '../timeDiff';
  * @extends {TimeDiff}
  */
 export class Greenwich extends TimeDiff {
-    constructor(dateStr: string) {
-        super(dateStr, 9);
+    private readonly timeDiff: number = 9;
+
+    public of(dateStr: string) {
+        this.date = new Date(dateStr);
+
+        this.date.setHours(this.date.getHours() + this.timeDiff);
     }
 }

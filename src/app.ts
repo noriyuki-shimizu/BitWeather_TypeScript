@@ -15,10 +15,7 @@ locationList.push(new TokoroImpl());
 
 locationList.forEach(location => {
     location.getLocation((latlon, address) => {
-        const openWeatherMap: OpenWeatherMap = new OpenWeatherMap(
-            latlon,
-            address
-        );
+        const openWeatherMap: OpenWeatherMap = new OpenWeatherMap(latlon);
 
         openWeatherMap.getWeather(weatherDataList => {
             const openWeatherMapConvert: Convert = new OpenWeatherMapConvert(

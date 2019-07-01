@@ -1,8 +1,18 @@
 import { Convert } from '../convert';
-import { TimeDiff } from '../../date/timeDiff/timeDiff';
 import { Greenwich } from '../../date/timeDiff/greenwith/greenwich';
 import { Format } from '../../date/format/format';
 import { AggregateWeatherData } from './formatWeather/aggregateWeatherData';
+
+type ConvertData = {
+    text: string;
+    color: string;
+    submenu: any;
+};
+
+type SubmenuData = {
+    text: string;
+    color: string;
+};
 
 /**
  * APIから取得されたデータを変換するクラス。
@@ -14,19 +24,16 @@ import { AggregateWeatherData } from './formatWeather/aggregateWeatherData';
 export class OpenWeatherMapConvert implements Convert {
     private weatherDataList: any[];
 
-    private readonly formatStr: string = 'YYYY/MM/DD (ddd)';
-
     constructor(weatherDataList: any[]) {
-        const format: Format = new Format(this.formatStr);
+        const format: Format = new Format('YYYY/MM/DD (ddd)');
 
+        const timeDiff: Greenwich = new Greenwich();
         const groupingList: any[] = [];
         weatherDataList.forEach(weatherData => {
-            const greenwich: TimeDiff = new Greenwich(weatherData.dt_txt);
-            const formatDate: string = format.getFormatDate(
-                greenwich.getDate()
-            );
+            timeDiff.of(weatherData.dt_txt);
+            const formatDate: string = format.getFormatDate(timeDiff.getDate());
 
-            if (groupingList[formatDate] === undefined) {
+            if (!groupingList[formatDate]) {
                 groupingList[formatDate] = [];
             }
             groupingList[formatDate].push(weatherData);
@@ -38,20 +45,14 @@ export class OpenWeatherMapConvert implements Convert {
     public convert(): Array<{ text: string; color: string; submenu: [] }> {
         const groupKeyList: string[] = Object.keys(this.weatherDataList);
 
-        const convertList: Array<{
-            text: string;
-            color: string;
-            submenu: any;
-        }> = [];
+        const convertList: ConvertData[] = [];
 
-        groupKeyList.forEach((groupKey, index) => {
+        groupKeyList.map((groupKey, index) => {
             const convertWeatherData: AggregateWeatherData = new AggregateWeatherData(
                 this.weatherDataList[groupKey]
             );
 
-            let submenu: Array<{ text: string; color: string }>;
-
-            submenu = [
+            const submenu: SubmenuData[] = [
                 {
                     text: convertWeatherData.getWeather(),
                     color: 'black'
@@ -75,11 +76,12 @@ export class OpenWeatherMapConvert implements Convert {
             ];
 
             if (index === 0) {
-                const todayWeatherDataList = this.weatherDataList[groupKey];
-                const todayTemp: number = todayWeatherDataList[0].main.temp;
+                const { temp }: { temp: number } = this.weatherDataList[
+                    groupKey
+                ].main;
 
                 submenu.splice(1, 0, {
-                    text: convertWeatherData.getFormatTodayTemp(todayTemp),
+                    text: convertWeatherData.getFormatTodayTemp(temp),
                     color: 'black'
                 });
             }

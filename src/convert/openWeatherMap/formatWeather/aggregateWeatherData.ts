@@ -1,6 +1,8 @@
 import { ConditionCodes } from '../../../weather/parts/conditionCodes';
 import { WindDigree } from '../../../weather/parts/windDigree';
 
+type Condition = { icon: string; meaning: string };
+
 /**
  * 取得された天気データの集計に関するクラス。
  *
@@ -20,10 +22,9 @@ export class AggregateWeatherData {
     constructor(dateWeatherList: any[]) {
         dateWeatherList.forEach(dateWeather => {
             const key: number = dateWeather.weather[0].id;
-            this.weatherCnt[key] =
-                this.weatherCnt[key] !== undefined
-                    ? this.weatherCnt[key] + 1
-                    : 1;
+            this.weatherCnt[key] = this.weatherCnt[key]
+                ? this.weatherCnt[key] + 1
+                : 1;
 
             this.tempMaxList.push(dateWeather.main.temp_max);
             this.tempMinList.push(dateWeather.main.temp_min);
@@ -52,13 +53,10 @@ export class AggregateWeatherData {
                 mostWeatherId = Number(key);
             }
         }
-        const conditionCode = new ConditionCodes();
-        const condition: {
-            id: number;
-            meaning: string;
-            icon: string;
-        } = conditionCode.get(mostWeatherId);
-        return `${condition.icon} ${condition.meaning}`;
+        const { icon, meaning }: Condition = new ConditionCodes().get(
+            mostWeatherId
+        );
+        return `${icon} ${meaning}`;
     }
 
     public getFormatTodayTemp(todayTemp: number): string {
@@ -81,12 +79,10 @@ export class AggregateWeatherData {
     public getWind(): string {
         const windSpeed = this.average(this.windSpeedList);
         const windDeg = this.average(this.windDegList);
-        const digree: {
-            f: number;
-            t: number;
-            windDigree: string;
-        } = new WindDigree().get(windDeg);
-        return `風： ${this.orgRound(windSpeed, 100)}m(${digree.windDigree})`;
+        const { windDigree }: { windDigree: string } = new WindDigree().get(
+            windDeg
+        );
+        return `風： ${this.orgRound(windSpeed, 100)}m(${windDigree})`;
     }
 
     public isRainEmpty(): boolean {
@@ -116,9 +112,7 @@ export class AggregateWeatherData {
     }
 
     private sum(numList: number[]): number {
-        return numList.reduce((prev, current) => {
-            return prev + current;
-        });
+        return numList.reduce((prev, current) => prev + current);
     }
 
     private average(numList: number[]): number {
