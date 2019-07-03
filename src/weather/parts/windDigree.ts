@@ -19,12 +19,11 @@ export class WindDigree {
     constructor() {}
 
     public get(digree: number): { f: number; t: number; windDigree: string } {
-        if (digree < 22.5) {
-            digree += 360;
-        }
+        const convertDigree = digree < 22.5 ? digree + 360 : digree;
 
-        return this.windDigreeList.find(windDigree => {
-            return windDigree.f <= digree && digree < windDigree.t;
-        });
+        return this.windDigreeList.find(
+            windDigree =>
+                windDigree.f <= convertDigree && convertDigree < windDigree.t
+        );
     }
 }

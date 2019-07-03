@@ -24,10 +24,10 @@ export class OpenWeatherMapEnv extends Env {
         this.param = super.load('openweathermap.request.get');
     }
     public toString(): void {
-        console.log('url: ' + this.url);
-        console.log('cnt: ' + this.param.cnt);
-        console.log('units: ' + this.param.units);
-        console.log('mode: ' + this.param.mode);
-        console.log('appid: ' + this.param.appid);
+        console.log(`url: ${this.url}`);
+        console.log(`cnt: ${this.param.cnt}`);
+        console.log(`units: ${this.param.units}`);
+        console.log(`mode: ${this.param.mode}`);
+        console.log(`appid: ${this.param.appid}`);
     }
 }

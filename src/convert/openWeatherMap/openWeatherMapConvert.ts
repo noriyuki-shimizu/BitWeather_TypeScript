@@ -42,7 +42,7 @@ export class OpenWeatherMapConvert implements Convert {
         this.weatherDataList = groupingList;
     }
 
-    public convert(): Array<{ text: string; color: string; submenu: [] }> {
+    public convert(): { text: string; color: string; submenu: [] }[] {
         const groupKeyList: string[] = Object.keys(this.weatherDataList);
 
         const convertList: ConvertData[] = [];
@@ -101,9 +101,9 @@ export class OpenWeatherMapConvert implements Convert {
             }
 
             convertList.push({
+                submenu,
                 text: groupKey,
-                color: 'black',
-                submenu
+                color: 'black'
             });
         });
 

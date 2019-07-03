@@ -7,11 +7,11 @@ import * as bitbar from 'bitbar';
  * @class OpenWeatherMapBitBar
  */
 export class OpenWeatherMapBitBar {
-    private subMenuList: Array<{ text: string; color: string }>;
+    private subMenuList: { text: string; color: string }[];
     private address: string;
 
     constructor(
-        subMenuList: Array<{ text: string; color: string }>,
+        subMenuList: { text: string; color: string }[],
         address: string
     ) {
         this.subMenuList = subMenuList;

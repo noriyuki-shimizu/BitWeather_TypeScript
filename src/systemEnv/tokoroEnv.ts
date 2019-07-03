@@ -15,6 +15,6 @@ export class TokoroEnv extends Env {
         this.address = super.load('tokoro.address');
     }
     public toString(): void {
-        console.log('address: ' + this.address);
+        console.log(`address: ${this.address}`);
     }
 }

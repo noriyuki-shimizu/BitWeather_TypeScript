@@ -17,7 +17,7 @@ export class IpinfoEnv extends Env {
         this.requestGetToken = super.load('ipinfo.request.get.token');
     }
     public toString(): void {
-        console.log('requestUrl: ' + this.requestUrl);
-        console.log('getToken: ' + this.requestGetToken);
+        console.log(`requestUrl: ${this.requestUrl}`);
+        console.log(`getToken: ${this.requestGetToken}`);
     }
 }

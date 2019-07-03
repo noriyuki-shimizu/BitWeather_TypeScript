@@ -8,7 +8,7 @@ import { Convert } from './convert/convert';
 import { OpenWeatherMapConvert } from './convert/openWeatherMap/openWeatherMapConvert';
 import { OpenWeatherMapBitBar } from './bitbar/openWeatherMapBitBar';
 
-const locationList: Location[] = new Array();
+const locationList: Location[] = [];
 
 locationList.push(new IpinfoImpl());
 locationList.push(new TokoroImpl());
@@ -21,11 +21,11 @@ locationList.forEach(location => {
             const openWeatherMapConvert: Convert = new OpenWeatherMapConvert(
                 weatherDataList
             );
-            const convertWeatherData: Array<{
+            const convertWeatherData: {
                 text: string;
                 color: string;
                 submenu: [];
-            }> = openWeatherMapConvert.convert();
+            }[] = openWeatherMapConvert.convert();
 
             const openweatherMapBitBar: OpenWeatherMapBitBar = new OpenWeatherMapBitBar(
                 convertWeatherData,

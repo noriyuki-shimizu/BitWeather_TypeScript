@@ -12,7 +12,7 @@ export class Env {
 
     constructor() {
         const appYml: string = fs.readFileSync(
-            __dirname + '/../../config/app.yaml',
+            `${__dirname}/../../config/app.yaml`,
             'utf8'
         );
 
