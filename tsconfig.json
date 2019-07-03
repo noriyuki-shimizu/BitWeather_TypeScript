@@ -10,6 +10,9 @@
     "sourceMap": true,
     "types" : ["node"]
   },
+  "includes": [
+    "src/**/*"
+  ],
   "exclude": [
     "node_modules"
   ],
