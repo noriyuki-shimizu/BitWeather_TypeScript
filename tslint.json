@@ -1,7 +1,7 @@
 {
-    "defaultSeverity": "warning",
+    "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended",
+        "tslint-config-airbnb",
         "tslint-config-prettier"
     ],
     "linterOptions": {
