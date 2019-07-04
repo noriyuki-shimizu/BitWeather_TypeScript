@@ -22,7 +22,7 @@ type SubmenuData = {
  * @implements {Convert}
  */
 export class OpenWeatherMapConvert implements Convert {
-    private weatherDataList: any[];
+    private weatherData: any[];
 
     constructor(weatherDataList: any[]) {
         const format: Format = new Format('YYYY/MM/DD (ddd)');
@@ -39,17 +39,17 @@ export class OpenWeatherMapConvert implements Convert {
             groupingList[formatDate].push(weatherData);
         });
 
-        this.weatherDataList = groupingList;
+        this.weatherData = groupingList;
     }
 
     public convert(): { text: string; color: string; submenu: [] }[] {
-        const groupKeyList: string[] = Object.keys(this.weatherDataList);
+        const groupKeyList: string[] = Object.keys(this.weatherData);
 
         const convertList: ConvertData[] = [];
 
         groupKeyList.map((groupKey, index) => {
             const convertWeatherData: AggregateWeatherData = new AggregateWeatherData(
-                this.weatherDataList[groupKey]
+                this.weatherData[groupKey]
             );
 
             const submenu: SubmenuData[] = [
@@ -76,9 +76,8 @@ export class OpenWeatherMapConvert implements Convert {
             ];
 
             if (index === 0) {
-                const { temp }: { temp: number } = this.weatherDataList[
-                    groupKey
-                ].main;
+                const [weather] = this.weatherData[groupKey];
+                const { temp }: { temp: number } = weather.main;
 
                 submenu.splice(1, 0, {
                     text: convertWeatherData.getFormatTodayTemp(temp),
