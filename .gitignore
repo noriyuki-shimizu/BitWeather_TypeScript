@@ -65,7 +65,6 @@ typings/
 BitWeather.iml
 
 dist
-report
 
 # SonarQube
 .scannerwork
