@@ -6,7 +6,7 @@ import { AggregateWeatherData } from './formatWeather/aggregateWeatherData';
 type ConvertData = {
     text: string;
     color: string;
-    submenu: any;
+    submenu: SubmenuData[];
 };
 
 type SubmenuData = {
@@ -42,12 +42,10 @@ export class OpenWeatherMapConvert implements Convert {
         this.weatherData = groupingList;
     }
 
-    public convert(): { text: string; color: string; submenu: [] }[] {
+    public convert(): ConvertData[] {
         const groupKeyList: string[] = Object.keys(this.weatherData);
 
-        const convertList: ConvertData[] = [];
-
-        groupKeyList.map((groupKey, index) => {
+        return groupKeyList.map((groupKey, index) => {
             const convertWeatherData: AggregateWeatherData = new AggregateWeatherData(
                 this.weatherData[groupKey]
             );
@@ -99,13 +97,11 @@ export class OpenWeatherMapConvert implements Convert {
                 });
             }
 
-            convertList.push({
+            return {
                 submenu,
                 text: groupKey,
                 color: 'black'
-            });
+            };
         });
-
-        return convertList;
     }
 }

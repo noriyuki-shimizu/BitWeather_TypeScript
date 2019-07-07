@@ -1,3 +1,14 @@
+type ConvertData = {
+    text: string;
+    color: string;
+    submenu: SubmenuData[];
+};
+
+type SubmenuData = {
+    text: string;
+    color: string;
+};
+
 /**
  * データ変換処理に関するインターフェース。
  *
@@ -5,5 +16,5 @@
  * @interface Convert
  */
 export interface Convert {
-    convert(): { text: string; color: string; submenu: [] }[];
+    convert(): ConvertData[];
 }
