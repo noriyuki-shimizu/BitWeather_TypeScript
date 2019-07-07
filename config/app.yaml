@@ -1,0 +1,19 @@
+ipinfo:
+  request:
+    url: 'https://ipinfo.io'
+    get:
+      token: 'Your ipinfo token.'
+tokoro:
+  address:
+  # If you want to specify an address, please add it below.
+  # The following description is an example.
+  # home: 'Home address'
+  # company: 'Company address'
+openweathermap:
+  request:
+    url: 'http://api.openweathermap.org/data/2.5/forecast'
+    get:
+      appID: 'Your openweathermap app id.'
+      cnt: '40'
+      units: 'metric'
+      mode: 'json'
