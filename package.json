@@ -8,7 +8,8 @@
     "tslint:fix": "tslint --fix 'src/**/*.ts'",
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "scanner": "sonar-scanner"
   },
   "author": "",
   "license": "ISC",
