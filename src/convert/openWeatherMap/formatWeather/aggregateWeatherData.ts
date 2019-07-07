@@ -31,28 +31,22 @@ export class AggregateWeatherData {
             this.humidityList.push(dateWeather.main.humidity);
             this.windDegList.push(dateWeather.wind.deg);
             this.windSpeedList.push(dateWeather.wind.speed);
-            this.rainList.push(
-                !this.isObjectEmpty(dateWeather.rain)
-                    ? dateWeather.rain['3h']
-                    : 0
-            );
-            this.snowList.push(
-                !this.isObjectEmpty(dateWeather.snow)
-                    ? dateWeather.snow['3h']
-                    : 0
-            );
+            this.rainList.push(dateWeather.rain ? dateWeather.rain['3h'] : 0);
+            this.snowList.push(dateWeather.snow ? dateWeather.snow['3h'] : 0);
         });
     }
 
     public getWeather(): string {
         let mostWeatherIdCnt: number = 0;
         let mostWeatherId: number;
-        for (const key in this.weatherCnt) {
+
+        Object.keys(this.weatherCnt).forEach(key => {
             if (this.weatherCnt[key] > mostWeatherIdCnt) {
                 mostWeatherIdCnt = this.weatherCnt[key];
                 mostWeatherId = Number(key);
             }
-        }
+        });
+
         const { icon, meaning }: Condition = new ConditionCodes().get(
             mostWeatherId
         );
@@ -105,10 +99,6 @@ export class AggregateWeatherData {
             this.average(this.snowList),
             100
         )}`;
-    }
-
-    private isObjectEmpty(obj: {}): boolean {
-        return obj === undefined || 0 === Object.keys(obj).length;
     }
 
     private sum(numList: number[]): number {

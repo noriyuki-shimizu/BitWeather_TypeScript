@@ -23,14 +23,9 @@ export class TokoroImpl implements Location {
 
         for (const key in this.env.address) {
             const address = this.env.address[key];
-            tokoro(this.env.address[key], code => {
-                const latlon: { lat: number; lon: number } = {
-                    lat: code[0],
-                    lon: code[1]
-                };
-
-                callback(latlon, address);
-            });
+            tokoro(this.env.address[key], ([lat, lon]) =>
+                callback({ lat, lon }, address)
+            );
         }
     }
 }

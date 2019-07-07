@@ -10,8 +10,4 @@ export class TimeDiff {
     public getDate(): Date {
         return this.date;
     }
-
-    public isNowDate(): boolean {
-        return new Date().getDate === this.date.getDate;
-    }
 }

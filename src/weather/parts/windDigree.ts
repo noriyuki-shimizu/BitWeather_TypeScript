@@ -1,3 +1,9 @@
+type WindDigreeData = {
+    f: number;
+    t: number;
+    windDigree: string;
+};
+
 /**
  * 風向き取得に関するクラス。
  *
@@ -18,7 +24,7 @@ export class WindDigree {
 
     constructor() {}
 
-    public get(digree: number): { f: number; t: number; windDigree: string } {
+    public get(digree: number): WindDigreeData {
         const convertDigree = digree < 22.5 ? digree + 360 : digree;
 
         return this.windDigreeList.find(

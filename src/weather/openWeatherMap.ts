@@ -24,6 +24,10 @@ export class OpenWeatherMap {
             method: 'GET',
             url: this.env.url,
             params: { ...this.env.param, ...this.latlon }
-        }).then(response => callback(response.data.list));
+        })
+            .then(response => callback(response.data.list))
+            .catch(error => {
+                throw new Error(error);
+            });
     }
 }

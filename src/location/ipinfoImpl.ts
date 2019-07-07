@@ -21,16 +21,15 @@ export class IpinfoImpl implements Location {
             method: 'GET',
             url: this.env.requestUrl,
             params: { token: this.env.requestGetToken }
-        }).then(response => {
-            const location: string = response.data.loc;
-            const latlonList: string[] = location.split(',');
+        })
+            .then(response => {
+                const { loc }: { loc: string } = response.data;
+                const [lat, lon] = loc.split(',');
 
-            const latlon: { lat: string; lon: string } = {
-                lat: latlonList[0],
-                lon: latlonList[1]
-            };
-
-            callback(latlon, '現在地');
-        });
+                callback({ lat, lon }, '現在地');
+            })
+            .catch((error: any) => {
+                throw new Error(error);
+            });
     }
 }

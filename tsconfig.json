@@ -5,7 +5,8 @@
     "outDir": "./dist",
     "charset": "utf8",
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/@types"
     ],
     "sourceMap": true,
     "types" : ["node"]

@@ -1,5 +1,10 @@
 import * as bitbar from 'bitbar';
 
+type SubMenu = {
+    text: string;
+    color: string;
+};
+
 /**
  * bitbarを用いた天気予報の表示に関するクラス。
  *
@@ -7,13 +12,10 @@ import * as bitbar from 'bitbar';
  * @class OpenWeatherMapBitBar
  */
 export class OpenWeatherMapBitBar {
-    private subMenuList: { text: string; color: string }[];
+    private subMenuList: SubMenu[];
     private address: string;
 
-    constructor(
-        subMenuList: { text: string; color: string }[],
-        address: string
-    ) {
+    constructor(subMenuList: SubMenu[], address: string) {
         this.subMenuList = subMenuList;
         this.address = address;
     }

@@ -1,4 +1,6 @@
-export type CallbackType = (
-    latlon: { lat: string | number; lon: string | number },
-    address: string
-) => void;
+type LatLon = {
+    lat: string | number;
+    lon: string | number;
+};
+
+export type CallbackType = (latlon: LatLon, address: string) => void;

@@ -1,3 +1,9 @@
+type ConditionCode = {
+    id: number;
+    meaning: string;
+    icon: string;
+};
+
 /**
  * 天気の状態取得に関するクラス。
  *
@@ -68,11 +74,9 @@ export class ConditionCodes {
         { id: 804, meaning: '曇り', icon: '☁️' }
     ]);
 
-    public get(
-        weatherId: number
-    ): { id: number; meaning: string; icon: string } {
-        return this.conditionCodeList.find(conditionCode => {
-            return weatherId === conditionCode.id;
-        });
+    public get(weatherId: number): ConditionCode {
+        return this.conditionCodeList.find(
+            conditionCode => weatherId === conditionCode.id
+        );
     }
 }

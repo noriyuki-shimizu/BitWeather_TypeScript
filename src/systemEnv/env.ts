@@ -1,6 +1,11 @@
 import * as fs from 'fs';
 import * as yaml from 'yaml';
 
+type NextIterator = {
+    value: number;
+    done: boolean;
+};
+
 /**
  * 設定ファイル読み込みに関するクラス。
  *
@@ -29,13 +34,11 @@ export class Env {
 
         return this.yamlPropertys[key];
     }
-    private scan(yamlProperty: any, keyIterator: any): any {
-        const next: { value: number; done: boolean } = keyIterator.next();
+    private scan(yamlProperty: any, keyIterator: any): string | number {
+        const { value, done }: NextIterator = keyIterator.next();
 
-        if (next.done) {
-            return yamlProperty;
-        }
-
-        return this.scan(yamlProperty[next.value], keyIterator);
+        return done
+            ? yamlProperty
+            : this.scan(yamlProperty[value], keyIterator);
     }
 }
