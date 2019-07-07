@@ -1,9 +1,3 @@
-type WindDigreeData = {
-    f: number;
-    t: number;
-    windDigree: string;
-};
-
 /**
  * 風向き取得に関するクラス。
  *

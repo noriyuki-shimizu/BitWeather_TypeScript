@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { Location } from './location';
 import { IpinfoEnv } from './../systemEnv/ipinfoEnv';
-import { CallbackType } from './callbackType';
 
 /**
  * ipInfoに関するクラス。
@@ -16,7 +15,7 @@ export class IpinfoImpl implements Location {
 
     constructor() {}
 
-    public getLocation(callback: CallbackType): void {
+    public getLocation(callback: LocationCallbackType): void {
         axios({
             method: 'GET',
             url: this.env.requestUrl,

@@ -8,17 +8,6 @@ import { Convert } from './convert/convert';
 import { OpenWeatherMapConvert } from './convert/openWeatherMap/openWeatherMapConvert';
 import { OpenWeatherMapBitBar } from './bitbar/openWeatherMapBitBar';
 
-type ConvertData = {
-    text: string;
-    color: string;
-    submenu: SubmenuData[];
-};
-
-type SubmenuData = {
-    text: string;
-    color: string;
-};
-
 const locationList: Location[] = [];
 
 locationList.push(new IpinfoImpl());

@@ -1,11 +1,6 @@
 import * as fs from 'fs';
 import * as yaml from 'yaml';
 
-type NextIterator = {
-    value: number;
-    done: boolean;
-};
-
 /**
  * 設定ファイル読み込みに関するクラス。
  *

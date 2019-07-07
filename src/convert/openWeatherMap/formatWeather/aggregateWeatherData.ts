@@ -1,8 +1,6 @@
 import { ConditionCodes } from '../../../weather/parts/conditionCodes';
 import { WindDigree } from '../../../weather/parts/windDigree';
 
-type Condition = { icon: string; meaning: string };
-
 /**
  * 取得された天気データの集計に関するクラス。
  *
@@ -47,7 +45,7 @@ export class AggregateWeatherData {
             }
         });
 
-        const { icon, meaning }: Condition = new ConditionCodes().get(
+        const { icon, meaning }: ConditionCode = new ConditionCodes().get(
             mostWeatherId
         );
         return `${icon} ${meaning}`;

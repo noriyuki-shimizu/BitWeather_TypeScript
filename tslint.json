@@ -19,6 +19,7 @@
         "interface-over-type-literal": false,
         "no-console": [
             false
-        ]
+        ],
+        "no-boolean-literal-compare": false
     }
 }

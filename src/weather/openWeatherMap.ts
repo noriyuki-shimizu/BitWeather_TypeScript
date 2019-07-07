@@ -2,9 +2,6 @@ import axios from 'axios';
 
 import { OpenWeatherMapEnv } from '../systemEnv/openWeatherMapEnv';
 
-type LatLon = { lat: number | string; lon: number | string };
-type CallbackType = (weatherDataList: any[]) => void;
-
 /**
  * OpenWeatherMap API操作に関するクラス。
  *
@@ -19,7 +16,7 @@ export class OpenWeatherMap {
         this.latlon = latlon;
     }
 
-    public getWeather(callback: CallbackType): void {
+    public getWeather(callback: WeatherCallbackType): void {
         axios({
             method: 'GET',
             url: this.env.url,

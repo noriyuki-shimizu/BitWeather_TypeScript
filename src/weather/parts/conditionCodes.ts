@@ -1,9 +1,3 @@
-type ConditionCode = {
-    id: number;
-    meaning: string;
-    icon: string;
-};
-
 /**
  * 天気の状態取得に関するクラス。
  *

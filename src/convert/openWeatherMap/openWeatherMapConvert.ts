@@ -3,17 +3,6 @@ import { Greenwich } from '../../date/timeDiff/greenwith/greenwich';
 import { Format } from '../../date/format/format';
 import { AggregateWeatherData } from './formatWeather/aggregateWeatherData';
 
-type ConvertData = {
-    text: string;
-    color: string;
-    submenu: SubmenuData[];
-};
-
-type SubmenuData = {
-    text: string;
-    color: string;
-};
-
 /**
  * APIから取得されたデータを変換するクラス。
  *
