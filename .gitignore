@@ -68,3 +68,6 @@ dist
 
 # SonarQube
 .scannerwork
+
+# .tmp
+.tmp
