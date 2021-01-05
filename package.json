@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@types/node": "^11.9.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "bitbar": "^0.4.0",
     "date-and-time": "^0.6.3",
     "tokoro": "^0.2.1",
